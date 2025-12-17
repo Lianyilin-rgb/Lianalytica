@@ -359,7 +359,7 @@ python server.py
 
 ## 📞 联系我们
 
-- **项目主页**：https://github.comL/ianyilin-rgb/lianalytica
+- **项目主页**：https://github.com/ianyilin-rgb/lianalytica
 - **问题反馈**：https://github.com/ianyilin-rgb/lianalytica/issues
 - **开发者**：连毅霖
 
