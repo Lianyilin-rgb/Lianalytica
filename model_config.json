@@ -1,0 +1,72 @@
+{
+  "models": [
+    {
+      "id": "audio_processor_pro",
+      "name": "AI一键修音大师",
+      "type": "audio",
+      "path": "./models/audio_processor_pro.gguf",
+      "size": 14,
+      "quantization": "q2_k",
+      "capabilities": ["tuning", "pitch-correction", "daw-export", "mixing", "mastering", "chord-recognition", "analysis", "midi-conversion", "instrument-detection", "chord-generation", "vocal-analysis", "separation", "stem-creation"]
+    },
+    {
+      "id": "image_processor_pro",
+      "name": "图像处理器专业版",
+      "type": "image",
+      "path": "./models/image_processor_pro.gguf",
+      "size": 13,
+      "quantization": "q2_k",
+      "capabilities": ["image-processing", "generation", "editing"]
+    },
+    {
+      "id": "code_analyzer_pro",
+      "name": "代码分析专业版",
+      "type": "code",
+      "path": "./models/code_analyzer_pro.gguf",
+      "size": 15,
+      "quantization": "q2_k",
+      "capabilities": ["code-analysis", "optimization", "generation"]
+    },
+    {
+      "id": "text_processor_ultra",
+      "name": "文本处理至尊版",
+      "type": "text",
+      "path": "./models/text_processor_ultra.gguf",
+      "size": 14,
+      "quantization": "q2_k",
+      "capabilities": ["text-generation", "translation", "summarization"]
+    },
+    {
+      "id": "deepseek_r1_671b",
+      "name": "DeepSeek R1基础模型",
+      "type": "llm",
+      "path": "./models/deepseek_r1_671b.gguf",
+      "size": 39,
+      "quantization": "q2_k",
+      "capabilities": ["general-purpose", "chat", "reasoning"]
+    },
+    {
+      "id": "music_notation_pro",
+      "name": "AI音乐打谱大师",
+      "type": "music",
+      "path": "./models/music_notation_pro.gguf",
+      "size": 10,
+      "quantization": "q2_k",
+      "capabilities": ["music-notation", "musicxml-generation", "score-creation", "parsing", "quantization", "compression"]
+    }
+  ],
+  "total_size": 105,
+  "max_size": 100,
+  "default_models": {
+    "audio": "audio-vocal-tuning",
+    "llm": "llama3"
+  },
+  "embedding": {
+    "enabled": true,
+    "launcher_integration": true,
+    "compression": {
+      "type": "zip",
+      "ratio": 0.8
+    }
+  }
+}

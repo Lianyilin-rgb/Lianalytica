@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lianalytica - 创作基座</title>
+    <script src="https://cdn.jsdelivr.net/npm/i18next@23.7.6/dist/umd/i18next.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/i18next-http-backend@2.4.2/dist/umd/i18nextHttpBackend.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@7.2.0/dist/umd/i18nextBrowserLanguageDetector.min.js"></script>
+    <style>
+        /* 基础样式 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* 主背景样式 - 使用LOGO作为背景 */
+        .main-bg {
+            background-image: url('软件logo和启动logo.jpg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+            background-color: #f9f9f9;
+            position: relative;
+        }
+        
+        /* 音频界面背景 */
+        #audio-processing {
+            background-image: url('软件webui运行界面背景.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        /* 背景图片加载失败时的备用样式 */
+        .main-bg.no-image {
+            background-image: none;
+            background-color: #f0f8ff;
+        }
+        
+        #audio-processing.no-image {
+            background-image: none;
+            background-color: #fff0f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            max-height: 80px;
+            margin-bottom: 10px;
+        }
+        
+        .welcome-message {
+            font-size: 24px;
+            margin: 10px 0;
+            color: #333;
+        }
+        
+        /* 导航栏样式 */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-tab {
+            padding: 10px 20px;
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .nav-tab:hover {
+            background-color: #eee;
+        }
+        
+        .nav-tab.active {
+            background-color: #007bff;
+            color: white;
+        }
+        
+        /* 内容区域样式 */
+        .content-area {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            min-height: 400px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* 功能区样式 */
+        .function-area {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .left-panel, .right-panel {
+            flex: 1;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        
+        .upload-area {
+            border: 2px dashed #ccc;
+            padding: 30px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .upload-area:hover {
+            border-color: #007bff;
+            background-color: #f0f7ff;
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            min-height: 100px;
+            margin-bottom: 10px;
+            resize: vertical;
+        }
+        
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        /* 任务列表和结果样式 */
+        .task-list {
+            margin-bottom: 20px;
+            max-height: 100px;
+            overflow-y: auto;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: white;
+            border: 1px solid #eee;
+        }
+        
+        .result-display {
+            min-height: 200px;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: white;
+            border: 1px solid #eee;
+            margin-bottom: 15px;
+        }
+        
+        /* 提示信息样式 */
+        .info-notice {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #fff;
+            border-radius: 15px;
+            padding: 15px 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            max-width: 80%;
+            z-index: 1000;
+            border-left: 5px solid #ff9800;
+            display: flex;
+            align-items: center;
+            animation: slideUp 0.5s;
+        }
+        
+        @keyframes slideUp {
+            from { bottom: -100px; opacity: 0; }
+            to { bottom: 20px; opacity: 1; }
+        }
+        
+        .notice-text {
+            flex: 1;
+            line-height: 1.6;
+        }
+        
+        .notice-text strong {
+            color: #e53935;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            color: #666;
+            padding: 5px 10px;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .close-btn:hover {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        
+        .cute-emoji {
+            font-size: 20px;
+            margin-right: 5px;
+        }
+        
+        /* 终端窗口样式 */
+        .terminal-window {
+            border-radius: 8px;
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .terminal-header {
+            background-color: #333;
+            padding: 10px 15px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .terminal-close {
+            background-color: #ff5f56;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            cursor: pointer;
+            padding: 0;
+        }
+        
+        .terminal-content {
+            padding: 15px;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+        }
+        
+        .terminal-output {
+            margin-bottom: 10px;
+            min-height: 150px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .terminal-input {
+            display: flex;
+            align-items: center;
+        }
+        
+        .terminal-input input {
+            flex: 1;
+            background-color: transparent;
+            border: none;
+            color: #d4d4d4;
+            font-family: inherit;
+            font-size: inherit;
+            margin-left: 5px;
+            outline: none;
+        }
+        
+        /* 进度查看器样式 */
+        .progress-item {
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            padding: 12px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .progress-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .progress-bar-container {
+            width: 100%;
+            background-color: #e9ecef;
+            border-radius: 3px;
+            overflow: hidden;
+            height: 20px;
+            margin: 5px 0;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: #28a745;
+            width: 0;
+            transition: width 0.3s ease;
+        }
+        
+        .progress-text {
+            font-size: 12px;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .function-area {
+                flex-direction: column;
+            }
+            
+            .navbar {
+                justify-content: flex-start;
+                overflow-x: auto;
+            }
+            
+            .welcome-message {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-bg" id="main-bg">
+        <div class="container">
+            <div class="header">
+                <img src="软件logo和启动logo.jpg" class="logo" alt="Lianalytica Logo" onerror="this.style.display='none'">
+                <h1 data-i18n="brand"></h1>
+                <div class="welcome-message" data-i18n="welcome"></div>
+            </div>
+            
+            <div class="navbar">
+                <div class="nav-tab active" data-tab="audio-processing">🎵 <span data-i18n="tabs.audio"></span></div>
+                <div class="nav-tab" data-tab="image-processing">🖼️ <span data-i18n="tabs.image"></span></div>
+                <div class="nav-tab" data-tab="code-processing">💻 <span data-i18n="tabs.code"></span></div>
+                <div class="nav-tab" data-tab="conversation">💬 <span data-i18n="tabs.chat"></span></div>
+                <div class="nav-tab" data-tab="terminal">📊 <span data-i18n="tabs.terminal"></span></div>
+                <div class="nav-tab" data-tab="settings">⚙️ <span data-i18n="tabs.settings"></span></div>
+            </div>
+            
+            <div class="content-area">
+                <!-- 音频处理 tab -->
+                <div class="tab-content active" id="audio-processing">
+                    <h2 data-i18n="audio.title"></h2>
+                    <div class="function-area">
+                        <div class="left-panel">
+                            <h3 data-i18n="audio.upload"></h3>
+                            <div class="upload-area" id="audio-upload">
+                                <span data-i18n="upload.drag"></span><br>
+                                <span data-i18n="upload.or"></span><br>
+                                <button data-i18n="upload.select"></button>
+                                <input type="file" id="audio-file" style="display: none;" accept="audio/*">
+                            </div>
+                            
+                            <h3 data-i18n="audio.options"></h3>
+                            <select id="audio-option">
+                                <option value="chord-analysis" data-i18n="audio.chordAnalysis"></option>
+                                <option value="vocal-chords" data-i18n="audio.vocalChords"></option>
+                                <option value="instrument-midi" data-i18n="audio.instrumentMidi"></option>
+                                <option value="audio-separation" data-i18n="audio.audioSeparation"></option>
+                            </select>
+                            
+                            <h3 data-i18n="audio.requirements"></h3>
+                            <textarea id="audio-prompt" placeholder="请输入您的具体需求..."></textarea>
+                            
+                            <button id="process-audio" data-i18n="common.process"></button>
+                        </div>
+                        
+                        <div class="right-panel">
+                            <h3 data-i18n="common.taskList"></h3>
+                            <div class="task-list" id="audio-tasks"></div>
+                            
+                            <h3 data-i18n="common.results"></h3>
+                            <div class="result-display" id="audio-result"></div>
+                            
+                            <button id="download-audio" data-i18n="common.download" style="display: none;"></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 图像处理 tab -->
+                <div class="tab-content" id="image-processing">
+                    <h2 data-i18n="image.title"></h2>
+                    <!-- 内容结构类似音频处理 -->
+                    <div class="function-area">
+                        <div class="left-panel">
+                            <h3 data-i18n="image.upload"></h3>
+                            <div class="upload-area" id="image-upload">
+                                <span data-i18n="upload.drag"></span><br>
+                                <span data-i18n="upload.or"></span><br>
+                                <button data-i18n="upload.select"></button>
+                                <input type="file" id="image-file" style="display: none;" accept="image/*">
+                            </div>
+                            
+                            <h3 data-i18n="image.requirements"></h3>
+                            <textarea id="image-prompt" placeholder="请输入您的具体需求..."></textarea>
+                            
+                            <button id="process-image" data-i18n="common.process"></button>
+                        </div>
+                        
+                        <div class="right-panel">
+                            <h3 data-i18n="common.taskList"></h3>
+                            <div class="task-list" id="image-tasks"></div>
+                            
+                            <h3 data-i18n="common.results"></h3>
+                            <div class="result-display" id="image-result"></div>
+                            
+                            <button id="download-image" data-i18n="common.download" style="display: none;"></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 代码处理 tab -->
+                <div class="tab-content" id="code-processing">
+                    <h2 data-i18n="code.title"></h2>
+                    <!-- 内容结构类似音频处理 -->
+                    <div class="function-area">
+                        <div class="left-panel">
+                            <h3 data-i18n="code.upload"></h3>
+                            <div class="upload-area" id="code-upload">
+                                <span data-i18n="upload.drag"></span><br>
+                                <span data-i18n="upload.or"></span><br>
+                                <button data-i18n="upload.select"></button>
+                                <input type="file" id="code-file" style="display: none;" accept=".py,.js,.java,.cpp,.zip">
+                            </div>
+                            
+                            <h3 data-i18n="code.model"></h3>
+                            <select id="code-model">
+                                <option value="codellama" data-i18n="code.models.codellama"></option>
+                                <option value="deepseek" data-i18n="code.models.deepseek"></option>
+                                <option value="starcoder" data-i18n="code.models.starcoder"></option>
+                                <option value="wizardcoder" data-i18n="code.models.wizardcoder"></option>
+                            </select>
+                            
+                            <h3 data-i18n="code.requirements"></h3>
+                            <textarea id="code-prompt" placeholder="请输入您的具体需求..."></textarea>
+                            
+                            <button id="process-code" data-i18n="common.process"></button>
+                        </div>
+                        
+                        <div class="right-panel">
+                            <h3 data-i18n="common.taskList"></h3>
+                            <div class="task-list" id="code-tasks"></div>
+                            
+                            <h3 data-i18n="common.results"></h3>
+                            <div class="result-display" id="code-result"></div>
+                            
+                            <button id="download-code" data-i18n="common.download" style="display: none;"></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 对话 tab -->
+                <div class="tab-content" id="conversation">
+                    <h2 data-i18n="chat.title"></h2>
+                    <div class="function-area">
+                        <div class="left-panel" style="flex: 1;">
+                            <h3 data-i18n="chat.model"></h3>
+                            <select id="chat-model">
+                                <option value="llama3" data-i18n="chat.models.llama3"></option>
+                                <option value="gemma" data-i18n="chat.models.gemma"></option>
+                                <option value="mistral" data-i18n="chat.models.mistral"></option>
+                            </select>
+                            
+                            <h3 data-i18n="chat.message"></h3>
+                            <textarea id="chat-message" placeholder="请输入您的问题或消息..."></textarea>
+                            
+                            <button id="send-chat" data-i18n="chat.send"></button>
+                        </div>
+                        
+                        <div class="right-panel" style="flex: 2;">
+                            <h3 data-i18n="chat.history"></h3>
+                            <div class="result-display" id="chat-history" style="min-height: 300px;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 设置 tab -->
+                <div class="tab-content" id="settings">
+                    <h2 data-i18n="settings.title"></h2>
+                    <div class="setting-item">
+                        <label for="language-select" data-i18n="settings.language"></label>
+                        <select id="language-select">
+                            <option value="zh-CN" data-i18n="settings.languages.zhCN"></option>
+                            <option value="zh-TW" data-i18n="settings.languages.zhTW"></option>
+                            <option value="en" data-i18n="settings.languages.en"></option>
+                            <option value="fr" data-i18n="settings.languages.fr"></option>
+                            <option value="de" data-i18n="settings.languages.de"></option>
+                        </select>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <h3 data-i18n="settings.userGuide"></h3>
+                        <ul>
+                            <li><a href="user_guides/music_creator_guide.md" target="_blank" data-i18n="settings.guides.music"></a></li>
+                            <li><a href="user_guides/programmer_guide.md" target="_blank" data-i18n="settings.guides.programmer"></a></li>
+                            <li><a href="user_guides/general_user_guide.md" target="_blank" data-i18n="settings.guides.general"></a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- 终端与进度查看 tab -->
+                <div class="tab-content" id="terminal">
+                    <h2 data-i18n="terminal.title"></h2>
+                    
+                    <div class="terminal-controls">
+                        <div style="margin-bottom: 15px;">
+                            <button id="toggle-progress" data-i18n="terminal.toggleProgress"></button>
+                            <button id="new-terminal" data-i18n="terminal.newTerminal"></button>
+                        </div>
+                    </div>
+                    
+                    <!-- 实时进度查看区域 -->
+                    <div id="progress-view" style="display: block; margin-bottom: 20px;">
+                        <h3 data-i18n="terminal.progressTitle"></h3>
+                        <div id="active-tasks" style="max-height: 200px; overflow-y: auto;"></div>
+                    </div>
+                    
+                    <!-- 终端窗口区域 -->
+                    <div id="terminals-container">
+                        <div class="terminal-window" id="terminal-1">
+                            <div class="terminal-header">
+                                <span data-i18n="terminal.windowTitle"></span>
+                                <button class="terminal-close" data-terminal-id="1">✕</button>
+                            </div>
+                            <div class="terminal-content">
+                                <div class="terminal-output" id="terminal-output-1"></div>
+                                <div class="terminal-input">
+                                    <span>$ </span>
+                                    <input type="text" id="terminal-input-1" placeholder="输入命令..." readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 提示信息 -->
+    <div class="info-notice" id="info-notice">
+        <div class="notice-text">
+            <span class="cute-emoji">⚠️</span>
+            <strong data-i18n="notice.important"></strong>
+            <p data-i18n="notice.content1"></p>
+            <p data-i18n="notice.content2"></p>
+            <p data-i18n="notice.content3"></p>
+            <p><span class="cute-emoji">💖</span> <data-i18n="notice.wish"></data-i18n></p>
+        </div>
+        <button class="close-btn" id="close-notice">~本喵知道啦~(~关闭~）</button>
+    </div>
+
+    <script>
+        // 检查图片是否加载成功，失败则使用备用样式
+        function checkImageLoad() {
+            // 检查主背景图
+            const mainBgImg = new Image();
+            mainBgImg.src = '软件logo和启动logo.jpg';
+            mainBgImg.onerror = function() {
+                document.getElementById('main-bg').classList.add('no-image');
+            };
+            
+            // 检查音频界面背景图
+            const audioBgImg = new Image();
+            audioBgImg.src = '软件webui运行界面背景.jpg';
+            audioBgImg.onerror = function() {
+                document.getElementById('audio-processing').classList.add('no-image');
+            };
+            
+            // 检查logo图片
+            const logoImg = document.querySelector('.logo');
+            if (logoImg) {
+                logoImg.onerror = function() {
+                    this.style.display = 'none';
+                };
+            }
+        }
+        
+        // 初始化时检查图片加载
+        checkImageLoad();
+        
+        // 配置i18next
+        i18next
+            .use(i18nextHttpBackend)
+            .use(i18nextBrowserLanguageDetector)
+            .init({
+                fallbackLng: 'en',
+                debug: false,
+                detection: {
+                    order: ['navigator', 'geoip'],
+                    caches: ['localStorage']
+                },
+                backend: {
+                    loadPath: '/locales/{{lng}}.json'
+                },
+                interpolation: {
+                    escapeValue: false
+                }
+            }, function(err, t) {
+                updateContent();
+                
+                // 设置语言选择下拉框
+                document.getElementById('language-select').value = i18next.language;
+            });
+
+        // 获取地理位置并设置语言
+        function detectRegionAndSetLang() {
+            fetch('https://ipapi.co/json/')
+                .then(response => response.json())
+                .then(data => {
+                    const countryCode = data.country_code;
+                    let lang = 'en'; // 默认英语
+
+                    // 根据国家/地区设置语言
+                    switch(countryCode) {
+                        case 'CN':
+                            lang = 'zh-CN'; // 中国大陆 - 简体中文
+                            break;
+                        case 'TW':
+                        case 'HK':
+                        case 'MO':
+                            lang = 'zh-TW'; // 台湾、香港、澳门 - 繁体中文
+                            break;
+                        case 'FR':
+                            lang = 'fr'; // 法国 - 法语
+                            break;
+                        case 'DE':
+                            lang = 'de'; // 德国 - 德语
+                            break;
+                        // 其他英语国家保持默认英语
+                    }
+
+                    // 只在语言不同时才切换
+                    if (i18next.language !== lang) {
+                        i18next.changeLanguage(lang, (err, t) => {
+                            if (err) return console.log('Error changing language:', err);
+                            updateContent();
+                            document.getElementById('language-select').value = lang;
+                        });
+                    }
+                })
+                .catch(err => {
+                    console.log('Error detecting region:', err);
+                    // 失败时使用浏览器默认语言
+                });
+        }
+
+        // 更新页面内容
+        function updateContent() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                el.textContent = i18next.t(key);
+                
+                // 如果是占位符
+                if (el.tagName === 'TEXTAREA' && el.placeholder) {
+                    el.placeholder = i18next.t('placeholders.' + el.id) || el.placeholder;
+                }
+            });
+        }
+
+        // 标签切换功能
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // 移除所有active类
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // 给当前点击的标签添加active类
+                this.classList.add('active');
+                
+                // 显示对应的内容区域
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // 语言选择切换
+        document.getElementById('language-select').addEventListener('change', function() {
+            const selectedLang = this.value;
+            i18next.changeLanguage(selectedLang, (err, t) => {
+                if (err) return console.log('Error changing language:', err);
+                updateContent();
+            });
+        });
+        
+        // 关闭提示信息
+        document.getElementById('close-notice').addEventListener('click', function() {
+            document.getElementById('info-notice').style.display = 'none';
+            // 保存用户已关闭提示的状态
+            localStorage.setItem('noticeClosed', 'true');
+        });
+        
+        // 检查用户是否已关闭过提示
+        if (localStorage.getItem('noticeClosed') === 'true') {
+            document.getElementById('info-notice').style.display = 'none';
+        }
+        
+        // 上传区域点击事件
+        document.querySelectorAll('.upload-area').forEach(area => {
+            area.addEventListener('click', function() {
+                const fileInputId = this.id.replace('upload', 'file');
+                document.getElementById(fileInputId).click();
+            });
+        });
+        
+        // 文件选择事件
+        document.querySelectorAll('input[type="file"]').forEach(input => {
+            input.addEventListener('change', function() {
+                if (this.files.length > 0) {
+                    const fileName = this.files[0].name;
+                    const uploadAreaId = this.id.replace('file', 'upload');
+                    document.getElementById(uploadAreaId).innerHTML = `<span class="cute-emoji">✅</span> ${i18next.t('upload.selected')}: ${fileName}`;
+                }
+            });
+        });
+        
+        // 实时进度查看功能
+        function updateProgressView() {
+            fetch('/api/tasks')
+                .then(response => response.json())
+                .then(data => {
+                    const activeTasksDiv = document.getElementById('active-tasks');
+                    activeTasksDiv.innerHTML = '';
+                    
+                    if (data.tasks && data.tasks.length > 0) {
+                        data.tasks.forEach(task => {
+                            const taskDiv = document.createElement('div');
+                            taskDiv.className = 'progress-item';
+                            
+                            const statusIcon = task.status === 'running' ? '⏳' : 
+                                              task.status === 'completed' ? '✅' : '❌';
+                            
+                            taskDiv.innerHTML = `
+                                <div class="progress-title">${statusIcon} ${task.description}</div>
+                                <div class="progress-bar-container">
+                                    <div class="progress-bar" style="width: ${task.progress}%"></div>
+                                </div>
+                                <div class="progress-text">
+                                    ${task.progress_text || `进度: ${task.progress}%`} | 
+                                    状态: ${i18next.t(`terminal.status.${task.status}`)}
+                                </div>
+                            `;
+                            
+                            activeTasksDiv.appendChild(taskDiv);
+                        });
+                    } else {
+                        activeTasksDiv.innerHTML = `<p style="color: #666; text-align: center; padding: 20px;">${i18next.t('terminal.noTasks')}</p>`;
+                    }
+                })
+                .catch(error => {
+                    console.error('更新进度失败:', error);
+                });
+        }
+        
+        // 切换进度查看显示
+        document.getElementById('toggle-progress').addEventListener('click', function() {
+            const progressView = document.getElementById('progress-view');
+            if (progressView.style.display === 'none') {
+                progressView.style.display = 'block';
+                this.innerHTML = i18next.t('terminal.toggleProgress.hide');
+            } else {
+                progressView.style.display = 'none';
+                this.innerHTML = i18next.t('terminal.toggleProgress.show');
+            }
+        });
+        
+        // 创建新终端窗口
+        let terminalCount = 1;
+        document.getElementById('new-terminal').addEventListener('click', function() {
+            terminalCount++;
+            const terminalsContainer = document.getElementById('terminals-container');
+            
+            const terminalDiv = document.createElement('div');
+            terminalDiv.className = 'terminal-window';
+            terminalDiv.id = `terminal-${terminalCount}`;
+            
+            terminalDiv.innerHTML = `
+                <div class="terminal-header">
+                    <span>${i18next.t('terminal.windowTitle')} ${terminalCount}</span>
+                    <button class="terminal-close" data-terminal-id="${terminalCount}">✕</button>
+                </div>
+                <div class="terminal-content">
+                    <div class="terminal-output" id="terminal-output-${terminalCount}"></div>
+                    <div class="terminal-input">
+                        <span>$ </span>
+                        <input type="text" id="terminal-input-${terminalCount}" placeholder="输入命令..." readonly>
+                    </div>
+                </div>
+            `;
+            
+            terminalsContainer.appendChild(terminalDiv);
+            
+            // 添加关闭事件
+            terminalDiv.querySelector('.terminal-close').addEventListener('click', function() {
+                terminalDiv.remove();
+            });
+        });
+        
+        // 关闭终端窗口事件
+        document.querySelectorAll('.terminal-close').forEach(button => {
+            button.addEventListener('click', function() {
+                const terminalId = this.getAttribute('data-terminal-id');
+                const terminalDiv = document.getElementById(`terminal-${terminalId}`);
+                terminalDiv.remove();
+            });
+        });
+        
+        // 初始化时更新进度
+        updateProgressView();
+        
+        // 定期更新进度（每3秒）
+        setInterval(updateProgressView, 3000);
+        
+        // 初始化
+        detectRegionAndSetLang();
+    </script>
+    
+    <!-- 版权信息 -->
+    <div style="text-align: center; padding: 20px; font-size: 12px; color: #666;">
+        © 2025 连析工坊(Lianalytica)连毅霖版权所有
+    </div>
+</body>
+</html>

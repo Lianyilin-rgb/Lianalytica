@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片转Base64转换器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .converter {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        input[type="file"] {
+            margin: 10px 0;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            margin: 10px 0;
+            padding: 10px;
+            font-family: monospace;
+            resize: vertical;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .preview {
+            margin: 20px 0;
+        }
+        .preview img {
+            max-width: 200px;
+            max-height: 200px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>图片转Base64转换器</h1>
+    <p>请选择一张图片文件，系统会自动将其转换为Base64数据URI</p>
+    
+    <div class="converter">
+        <input type="file" id="imageFile" accept="image/*">
+        <div class="preview" id="preview"></div>
+        <textarea id="base64Result" placeholder="转换后的Base64数据将显示在这里..."></textarea>
+        <br>
+        <button onclick="copyToClipboard()">复制到剪贴板</button>
+        <button onclick="clearAll()">清除</button>
+    </div>
+    
+    <script>
+        const imageFile = document.getElementById('imageFile');
+        const base64Result = document.getElementById('base64Result');
+        const preview = document.getElementById('preview');
+        
+        imageFile.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const base64String = event.target.result;
+                    base64Result.value = base64String;
+                    preview.innerHTML = `<img src="${base64String}" alt="预览图片">`;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        
+        function copyToClipboard() {
+            base64Result.select();
+            base64Result.setSelectionRange(0, 99999);
+            document.execCommand('copy');
+            alert('Base64数据已复制到剪贴板');
+        }
+        
+        function clearAll() {
+            imageFile.value = '';
+            base64Result.value = '';
+            preview.innerHTML = '';
+        }
+    </script>
+</body>
+</html>

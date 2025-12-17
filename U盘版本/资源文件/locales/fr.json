@@ -1,0 +1,92 @@
+{
+    "brand": "Lian Yilin · Lianalytica",
+    "welcome": "Bienvenue sur votre Base de création Windows",
+    "tabs": {
+        "audio": "Traitement audio",
+        "image": "Traitement d'image",
+        "code": "Traitement de code",
+        "chat": "Conversation",
+        "settings": "Paramètres"
+    },
+    "audio": {
+        "title": "Fonctionnalités de traitement audio",
+        "upload": "Télécharger un fichier audio",
+        "options": "Options de traitement",
+        "chordAnalysis": "Analyse d'accords",
+        "vocalChords": "Accords pour voix",
+        "instrumentMidi": "Instrument vers MIDI",
+        "audioSeparation": "Séparation audio",
+        "requirements": "Description des besoins"
+    },
+    "image": {
+        "title": "Fonctionnalités de traitement d'image",
+        "upload": "Télécharger une image",
+        "requirements": "Description des besoins"
+    },
+    "code": {
+        "title": "Fonctionnalités de traitement de code",
+        "upload": "Télécharger un fichier de code",
+        "model": "Sélectionner le modèle",
+        "requirements": "Description des besoins",
+        "models": {
+            "codellama": "CodeLlama (Évaluation de qualité du code)",
+            "deepseek": "DeepSeek-Coder (Optimisation des performances)",
+            "starcoder": "StarCoder (Conception d'architecture)",
+            "wizardcoder": "WizardCoder (Support multilingue)"
+        }
+    },
+    "chat": {
+        "title": "Assistant de conversation",
+        "model": "Sélectionner le modèle",
+        "message": "Entrez un message",
+        "send": "Envoyer",
+        "history": "Historique de conversation",
+        "models": {
+            "llama3": "Llama3 (Capacité globale)",
+            "gemma": "Gemma (Questions-réponses)",
+            "mistral": "Mistral (Écriture créative)"
+        }
+    },
+    "settings": {
+        "title": "Paramètres du système",
+        "language": "Sélectionner la langue",
+        "languages": {
+            "zhCN": "Chinois (simplifié)",
+            "zhTW": "Chinois (traditionnel)",
+            "en": "Anglais",
+            "fr": "Français",
+            "de": "Allemand"
+        },
+        "userGuide": "Guides d'utilisation",
+        "guides": {
+            "music": "Guide pour créateurs de musique",
+            "programmer": "Guide pour programmeurs",
+            "general": "Guide pour utilisateurs généraux"
+        }
+    },
+    "common": {
+        "process": "Traiter",
+        "taskList": "Liste des tâches",
+        "results": "Résultats du traitement",
+        "download": "Télécharger les résultats"
+    },
+    "upload": {
+        "drag": "Glissez les fichiers ici",
+        "or": "ou",
+        "select": "Sélectionner des fichiers",
+        "selected": "Fichier sélectionné"
+    },
+    "placeholders": {
+        "audio-prompt": "Ex: Veuillez analyser la progression d'accords de cette chanson et donner des suggestions d'arrangement appropriées",
+        "image-prompt": "Ex: Veuillez décrire le contenu de cette image et deviner l'emplacement de prise de vue",
+        "code-prompt": "Ex: Veuillez analyser les goulets d'étranglement de performance de ce code et proposer des solutions d'optimisation",
+        "chat-message": "Ex: Veuillez expliquer ce qu'est l'intelligence artificielle en termes simples"
+    },
+    "notice": {
+        "important": "Avertissement important :",
+        "content1": "Ce logiciel s'inspire de documents publics et d'articles académiques, et certaines solutions aux erreurs persistantes s'appuient sur les suggestions du grand modèle DeepSeek R1.",
+        "content2": "Ce logiciel est développé sur la base du projet open source officiel Ollama et de grands modèles open source de classe mondiale, donc je n'ai pas le droit de percevoir de frais.",
+        "content3": "Si vous avez acheté ce logiciel, veuillez contacter immédiatement le vendeur pour demander un remboursement~ Petit Lian ne veut pas que personne soit trompé !",
+        "wish": "Bonne expérience d'utilisation !"
+    }
+}

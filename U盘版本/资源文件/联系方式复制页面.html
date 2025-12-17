@@ -1,0 +1,41 @@
+<!DOCTYPE html>    
+ <html lang="zh-CN">    
+ <head>    
+     <meta charset="UTF-8">    
+     <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>  
+     <script src="https://cdn.jsdelivr.net/clipboard.js/1.5.12/clipboard.min.js"></script>  
+     <title>联系方式复制</title>    
+ </head>    
+ <body>    
+ <h2>联系方式</h2>
+ <p>微信：<span id="weixin-target">lianyilin1031</span> 
+ <button class="btn" data-clipboard-action="copy" data-clipboard-target="#weixin-target" id="copy_weixin_btn">    
+     点击复制微信    
+ </button></p>
+ 
+ <p>邮箱：<span id="email-target">lianyilin1031@qq.com</span> 
+ <button class="btn" data-clipboard-action="copy" data-clipboard-target="#email-target" id="copy_email_btn">    
+     点击复制邮箱    
+ </button></p>
+ 
+ <h3>更多联系方式</h3>
+ <p><a href="开发报错解决方案与参考文档.md#六、联系方式" target="_blank">查看完整联系方式</a></p>
+ <p><a href="https://github.com/lyl-Ollamawebui" target="_blank">访问项目GitHub</a></p>
+ </body>    
+ <script>    
+     $(document).ready(function(){      
+         var clipboardWeixin = new Clipboard('#copy_weixin_btn');    
+         clipboardWeixin.on('success', function(e) {    
+             alert("微信复制成功"); 
+             window.location.href='weixin://'; 
+             e.clearSelection();    
+         });    
+          
+         var clipboardEmail = new Clipboard('#copy_email_btn');    
+         clipboardEmail.on('success', function(e) {    
+             alert("邮箱复制成功"); 
+             e.clearSelection();    
+         });    
+     });    
+ </script>    
+ </html>

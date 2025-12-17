@@ -1,0 +1,108 @@
+{
+    "brand": "连毅霖·连析工坊(Lianalytica)",
+    "welcome": "欢迎您使用 - 您的Windows创作基座",
+    "tabs": {
+        "audio": "音频处理",
+        "image": "图像处理",
+        "code": "代码处理",
+        "chat": "对话交流",
+        "terminal": "终端进度",
+        "settings": "系统设置"
+    },
+    "audio": {
+        "title": "音频处理功能",
+        "upload": "上传音频文件",
+        "options": "处理选项",
+        "chordAnalysis": "和弦分析",
+        "vocalChords": "人声和弦匹配",
+        "instrumentMidi": "乐器转MIDI",
+        "audioSeparation": "音轨分离",
+        "requirements": "需求描述"
+    },
+    "image": {
+        "title": "图像处理功能",
+        "upload": "上传图片",
+        "requirements": "需求描述"
+    },
+    "code": {
+        "title": "代码处理功能",
+        "upload": "上传代码文件",
+        "model": "选择模型",
+        "requirements": "需求描述",
+        "models": {
+            "codellama": "CodeLlama (代码质量评估)",
+            "deepseek": "DeepSeek-Coder (性能优化)",
+            "starcoder": "StarCoder (架构设计)",
+            "wizardcoder": "WizardCoder (多语言支持)"
+        }
+    },
+    "chat": {
+        "title": "对话助手",
+        "model": "选择模型",
+        "message": "输入消息",
+        "send": "发送",
+        "history": "对话历史",
+        "models": {
+            "llama3": "Llama3 (综合能力)",
+            "gemma": "Gemma (知识问答)",
+            "mistral": "Mistral (创意写作)"
+        }
+    },
+    "settings": {
+        "title": "系统设置",
+        "language": "选择语言",
+        "languages": {
+            "zhCN": "中文（简体）",
+            "zhTW": "中文（繁体）",
+            "en": "English",
+            "fr": "Français",
+            "de": "Deutsch"
+        },
+        "userGuide": "用户指南",
+        "guides": {
+            "music": "音乐创作者指南",
+            "programmer": "程序员使用指南",
+            "general": "普通用户使用指南"
+        }
+    },
+    "common": {
+        "process": "处理",
+        "taskList": "任务列表",
+        "results": "处理结果",
+        "download": "下载结果"
+    },
+    "upload": {
+        "drag": "拖拽文件到此处",
+        "or": "或",
+        "select": "选择文件",
+        "selected": "已选择文件"
+    },
+    "placeholders": {
+        "audio-prompt": "例如：请分析这首歌曲的和弦进行并给出合适的编曲建议",
+        "image-prompt": "例如：请描述这张图片的内容并猜测拍摄地点",
+        "code-prompt": "例如：请分析这段代码的性能瓶颈并提供优化方案",
+        "chat-message": "例如：请用简单的语言解释什么是人工智能"
+    },
+    "notice": {
+        "important": "重要提示：",
+        "content1": "本软件借鉴公共资料和学术论文，部分顽固错误的解决方案参考了DeepSeek R1大模型的建议。",
+        "content2": "本软件基于官方开源Ollama项目和世界级开源大模型开发，因此我无权收取任何费用。",
+        "content3": "如果您购买了本软件，请立即联系卖家申请退款~小连不希望大家上当受骗！",
+        "wish": "祝您使用愉快！"
+    },
+    "terminal": {
+        "title": "实时进度与终端",
+        "toggleProgress": "切换进度查看",
+        "toggleProgress.show": "显示进度",
+        "toggleProgress.hide": "隐藏进度",
+        "newTerminal": "新建终端",
+        "windowTitle": "终端窗口",
+        "progressTitle": "当前任务进度",
+        "status": {
+            "running": "运行中",
+            "completed": "已完成",
+            "failed": "已失败"
+        },
+        "noTasks": "当前没有正在运行的任务"
+    }
+}

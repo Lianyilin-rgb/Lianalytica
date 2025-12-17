@@ -1,0 +1,21 @@
+{
+  "name": "连析工坊 - AI音乐打谱大师",
+  "short_name": "连析工坊",
+  "description": "无需下载、无需联网的AI音乐打谱与创作工具",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#007bff",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "软件logo和启动logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["music", "productivity", "ai"],
+  "lang": "zh-CN",
+  "dir": "ltr"
+}

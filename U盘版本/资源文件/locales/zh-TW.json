@@ -1,0 +1,92 @@
+{
+    "brand": "連毅霖·連析工坊(Lianalytica)",
+    "welcome": "歡迎使用 - 您的Windows創作基座",
+    "tabs": {
+        "audio": "音頻處理",
+        "image": "圖像處理",
+        "code": "代碼處理",
+        "chat": "對話",
+        "settings": "設置"
+    },
+    "audio": {
+        "title": "音頻處理功能",
+        "upload": "上傳音頻文件",
+        "options": "處理選項",
+        "chordAnalysis": "和弦分析",
+        "vocalChords": "人聲配和弦",
+        "instrumentMidi": "樂器轉MIDI",
+        "audioSeparation": "音頻分離",
+        "requirements": "需求描述"
+    },
+    "image": {
+        "title": "圖像處理功能",
+        "upload": "上傳圖片",
+        "requirements": "需求描述"
+    },
+    "code": {
+        "title": "代碼處理功能",
+        "upload": "上傳代碼文件",
+        "model": "選擇模型",
+        "requirements": "需求描述",
+        "models": {
+            "codellama": "CodeLlama (代碼質量評估)",
+            "deepseek": "DeepSeek-Coder (性能優化)",
+            "starcoder": "StarCoder (架構設計)",
+            "wizardcoder": "WizardCoder (多語言支持)"
+        }
+    },
+    "chat": {
+        "title": "對話助手",
+        "model": "選擇模型",
+        "message": "輸入消息",
+        "send": "發送",
+        "history": "對話歷史",
+        "models": {
+            "llama3": "Llama3 (綜合能力)",
+            "gemma": "Gemma (知識問答)",
+            "mistral": "Mistral (創意寫作)"
+        }
+    },
+    "settings": {
+        "title": "系統設置",
+        "language": "選擇語言",
+        "languages": {
+            "zhCN": "中文(簡體)",
+            "zhTW": "中文(繁體)",
+            "en": "英語",
+            "fr": "法語",
+            "de": "德語"
+        },
+        "userGuide": "用戶指南",
+        "guides": {
+            "music": "音樂創作者指南",
+            "programmer": "程序員指南",
+            "general": "普通用戶指南"
+        }
+    },
+    "common": {
+        "process": "處理",
+        "taskList": "任務列表",
+        "results": "處理結果",
+        "download": "下載結果"
+    },
+    "upload": {
+        "drag": "拖放文件到這裡",
+        "or": "或者",
+        "select": "選擇文件",
+        "selected": "已選擇文件"
+    },
+    "placeholders": {
+        "audio-prompt": "例如：請分析這首歌曲的和弦進行，並給出適合的編曲建議",
+        "image-prompt": "例如：請描述這張圖片的內容，並推測拍攝地點",
+        "code-prompt": "例如：請分析這段代碼的性能瓶頸並提供優化方案",
+        "chat-message": "例如：請用簡單易懂的方式解釋什麼是人工智能"
+    },
+    "notice": {
+        "important": "重要聲明：",
+        "content1": "本軟件借鑒了公開的相關資料和學術論文，部分頑固報錯解決方案參考了DeepSeek R1大模型的建議。",
+        "content2": "本軟件基於Ollama官方開源項目及全球一流的開源大模型開發，因此我沒有權利收取任何費用。",
+        "content3": "如果您是購買的本軟件，請立即聯繫銷售方申請退款哦~ 小連連不希望大家被騙呢！",
+        "wish": "祝您使用愉快！"
+    }
+}

@@ -1,0 +1,92 @@
+{
+    "brand": "Lian Yilin · Lianalytica",
+    "welcome": "Welcome to your Windows Creation Base",
+    "tabs": {
+        "audio": "Audio Processing",
+        "image": "Image Processing",
+        "code": "Code Processing",
+        "chat": "Conversation",
+        "settings": "Settings"
+    },
+    "audio": {
+        "title": "Audio Processing Features",
+        "upload": "Upload Audio File",
+        "options": "Processing Options",
+        "chordAnalysis": "Chord Analysis",
+        "vocalChords": "Vocal Chord Matching",
+        "instrumentMidi": "Instrument to MIDI",
+        "audioSeparation": "Audio Separation",
+        "requirements": "Requirements Description"
+    },
+    "image": {
+        "title": "Image Processing Features",
+        "upload": "Upload Image",
+        "requirements": "Requirements Description"
+    },
+    "code": {
+        "title": "Code Processing Features",
+        "upload": "Upload Code File",
+        "model": "Select Model",
+        "requirements": "Requirements Description",
+        "models": {
+            "codellama": "CodeLlama (Code Quality Assessment)",
+            "deepseek": "DeepSeek-Coder (Performance Optimization)",
+            "starcoder": "StarCoder (Architecture Design)",
+            "wizardcoder": "WizardCoder (Multi-language Support)"
+        }
+    },
+    "chat": {
+        "title": "Conversation Assistant",
+        "model": "Select Model",
+        "message": "Enter Message",
+        "send": "Send",
+        "history": "Conversation History",
+        "models": {
+            "llama3": "Llama3 (Comprehensive Ability)",
+            "gemma": "Gemma (Knowledge Q&A)",
+            "mistral": "Mistral (Creative Writing)"
+        }
+    },
+    "settings": {
+        "title": "System Settings",
+        "language": "Select Language",
+        "languages": {
+            "zhCN": "Chinese (Simplified)",
+            "zhTW": "Chinese (Traditional)",
+            "en": "English",
+            "fr": "French",
+            "de": "German"
+        },
+        "userGuide": "User Guides",
+        "guides": {
+            "music": "Music Creator Guide",
+            "programmer": "Programmer Guide",
+            "general": "General User Guide"
+        }
+    },
+    "common": {
+        "process": "Process",
+        "taskList": "Task List",
+        "results": "Processing Results",
+        "download": "Download Results"
+    },
+    "upload": {
+        "drag": "Drag files here",
+        "or": "or",
+        "select": "Select Files",
+        "selected": "Selected file"
+    },
+    "placeholders": {
+        "audio-prompt": "E.g.: Please analyze the chord progression of this song and give appropriate arrangement suggestions",
+        "image-prompt": "E.g.: Please describe the content of this image and guess the shooting location",
+        "code-prompt": "E.g.: Please analyze the performance bottlenecks of this code and provide optimization solutions",
+        "chat-message": "E.g.: Please explain what artificial intelligence is in simple terms"
+    },
+    "notice": {
+        "important": "Important Notice:",
+        "content1": "This software draws on public materials and academic papers, and some solutions to persistent errors refer to suggestions from the DeepSeek R1 large model.",
+        "content2": "This software is developed based on the official open source Ollama project and world-class open source large models, so I have no right to charge any fees.",
+        "content3": "If you purchased this software, please contact the seller immediately to apply for a refund~ Little Lian doesn't want everyone to be cheated!",
+        "wish": "Wish you a pleasant experience!"
+    }
+}

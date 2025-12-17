@@ -1,0 +1,92 @@
+{
+    "brand": "Lian Yilin · Lianalytica",
+    "welcome": "Willkommen zu Ihrer Windows-Erstellungsbasis",
+    "tabs": {
+        "audio": "Audioverarbeitung",
+        "image": "Bildverarbeitung",
+        "code": "Codeverarbeitung",
+        "chat": "Konversation",
+        "settings": "Einstellungen"
+    },
+    "audio": {
+        "title": "Audioverarbeitungsfunktionen",
+        "upload": "Audio-Datei hochladen",
+        "options": "Verarbeitungsoptionen",
+        "chordAnalysis": "Akkordanalyse",
+        "vocalChords": "Gesangszuordnung",
+        "instrumentMidi": "Instrument zu MIDI",
+        "audioSeparation": "Audio-Trennung",
+        "requirements": "Anforderungsbeschreibung"
+    },
+    "image": {
+        "title": "Bildverarbeitungsfunktionen",
+        "upload": "Bild hochladen",
+        "requirements": "Anforderungsbeschreibung"
+    },
+    "code": {
+        "title": "Codeverarbeitungsfunktionen",
+        "upload": "Code-Datei hochladen",
+        "model": "Modell auswählen",
+        "requirements": "Anforderungsbeschreibung",
+        "models": {
+            "codellama": "CodeLlama (Codequalitätsbewertung)",
+            "deepseek": "DeepSeek-Coder (Leistungsoptimierung)",
+            "starcoder": "StarCoder (Architekturdesign)",
+            "wizardcoder": "WizardCoder (Mehrsprachunterstützung)"
+        }
+    },
+    "chat": {
+        "title": "Konversationsassistent",
+        "model": "Modell auswählen",
+        "message": "Nachricht eingeben",
+        "send": "Senden",
+        "history": "Konversationsverlauf",
+        "models": {
+            "llama3": "Llama3 (Umfassende Fähigkeit)",
+            "gemma": "Gemma (Wissensfragen)",
+            "mistral": "Mistral (Kreatives Schreiben)"
+        }
+    },
+    "settings": {
+        "title": "Systemeinstellungen",
+        "language": "Sprache auswählen",
+        "languages": {
+            "zhCN": "Chinesisch (vereinfacht)",
+            "zhTW": "Chinesisch (traditionell)",
+            "en": "Englisch",
+            "fr": "Französisch",
+            "de": "Deutsch"
+        },
+        "userGuide": "Benutzerleitfäden",
+        "guides": {
+            "music": "Leitfaden für Musikschöpfer",
+            "programmer": "Leitfaden für Programmierer",
+            "general": "Allgemeiner Benutzerleitfaden"
+        }
+    },
+    "common": {
+        "process": "Verarbeiten",
+        "taskList": "Aufgabenliste",
+        "results": "Verarbeitungsergebnisse",
+        "download": "Ergebnisse herunterladen"
+    },
+    "upload": {
+        "drag": "Dateien hier ziehen",
+        "or": "oder",
+        "select": "Dateien auswählen",
+        "selected": "Ausgewählte Datei"
+    },
+    "placeholders": {
+        "audio-prompt": "Z.B.: Analysieren Sie die Akkordfolge dieses Liedes und geben Sie geeignete Arrangementsvorschläge",
+        "image-prompt": "Z.B.: Beschreiben Sie den Inhalt dieses Bildes und raten Sie den Aufnahmeort",
+        "code-prompt": "Z.B.: Analysieren Sie die Leistungsengpässe dieses Codes und geben Sie Optimierungslösungen",
+        "chat-message": "Z.B.: Erklären Sie bitte in einfachen Worten, was Künstliche Intelligenz ist"
+    },
+    "notice": {
+        "important": "Wichtige Mitteilung:",
+        "content1": "Dieses Software stützt sich auf öffentliche Materialien und akademische Artikel, und einige Lösungen für anhaltende Fehler beziehen sich auf Vorschläge des DeepSeek R1-Modells.",
+        "content2": "Diese Software basiert auf dem offiziellen Open-Source-Ollama-Projekt und weltweit führenden Open-Source-Modellen, daher habe ich kein Recht, Gebühren zu erheben.",
+        "content3": "Wenn Sie diese Software gekauft haben, wenden Sie sich bitte sofort an den Verkäufer, um eine Rückerstattung zu beantragen~ Kleiner Lian möchte nicht, dass jemand getäuscht wird!",
+        "wish": "Viel Spaß mit der Nutzung!"
+    }
+}
